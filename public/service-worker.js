@@ -46,6 +46,9 @@ const FILES_TO_CACHE = [
   '/images/thunderstorm.svg',
   '/images/tornado.svg',
   '/images/wind.svg',
+  '/images/SplashScreen.png',
+  '/images/signatureScreen.png',
+  '/images/deliveryScreen.png'
 ];
 
 //用于缓存内容
