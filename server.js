@@ -26,7 +26,9 @@ const redirectToHTTPS = require('express-http-to-https').redirectToHTTPS;
 const FORECAST_DELAY = 0;
 
 // CODELAB: If running locally, set your Dark Sky API key here
-const API_KEY = process.env.DARKSKY_API_KEY;
+// const API_KEY = process.env.DARKSKY_API_KEY;
+const API_KEY = "fd12f48333c4ef2bccac81f4023876ef";
+
 const BASE_URL = `https://api.darksky.net/forecast`;
 
 // Fake forecast data used if we can't reach the Dark Sky API
