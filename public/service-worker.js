@@ -29,7 +29,7 @@ const FILES_TO_CACHE = [
   '/scripts/install.js',
   '/scripts/luxon-1.11.4.js',
   '/styles/inline.css',
-  'images/picView.png',
+  'images/resize.png',
   '/images/add.svg',
   '/images/clear-day.svg',
   '/images/clear-night.svg',
