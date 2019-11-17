@@ -58,7 +58,7 @@ self.addEventListener('install', (evt) => {
       return cache.addAll(FILES_TO_CACHE);
     })
   );
-  // self.skipWaiting();
+  self.skipWaiting();
 });
 
 //用于清除旧的缓存
