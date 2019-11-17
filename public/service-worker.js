@@ -58,7 +58,7 @@ self.addEventListener('install', (evt) => {
       return cache.addAll(FILES_TO_CACHE);
     })
   );
-  self.skipWaiting();
+  // self.skipWaiting();
 });
 
 //用于清除旧的缓存
@@ -79,33 +79,49 @@ self.addEventListener('activate', (evt) => {
 });
 
 //fetch事件在请求发送的时候触发
-self.addEventListener('fetch', (evt) => {
-  console.log('[ServiceWorker] Fetch', evt.request.url);
-  // CODELAB: Add fetch event handler here.
-  if (evt.request.url.includes('/forecast/')) {
-    console.log('[Service Worker] Fetch (data)', evt.request.url);
-    evt.respondWith(
-      caches.open(DATA_CACHE_NAME).then((cache) => {
-        return fetch(evt.request)
-          .then((response) => {
-            // If the response was good, clone it and store it in the cache.
-            if (response.status === 200) {
-              cache.put(evt.request.url, response.clone());
-            }
-            return response;
-          }).catch((err) => {
-            // Network request failed, try to get it from the cache.
-            return cache.match(evt.request);
-          });
-      }));
-    return;
-  }
-  evt.respondWith(
-    caches.open(CACHE_NAME).then((cache) => {
-      return cache.match(evt.request)
-        .then((response) => {
-          return response || fetch(evt.request);
+// self.addEventListener('fetch', (evt) => {
+//   console.log('[ServiceWorker] Fetch', evt.request.url);
+//   // CODELAB: Add fetch event handler here.
+//   if (evt.request.url.includes('/forecast/')) {
+//     console.log('[Service Worker] Fetch (data)', evt.request.url);
+//     evt.respondWith(
+//       caches.open(DATA_CACHE_NAME).then((cache) => {
+//         return fetch(evt.request)
+//           .then((response) => {
+//             // If the response was good, clone it and store it in the cache.
+//             if (response.status === 200) {
+//               cache.put(evt.request.url, response.clone());
+//             }
+//             return response;
+//           }).catch((err) => {
+//             // Network request failed, try to get it from the cache.
+//             return cache.match(evt.request);
+//           });
+//       }));
+//     return;
+//   }
+//   evt.respondWith(
+//     caches.open(CACHE_NAME).then((cache) => {
+//       return cache.match(evt.request)
+//         .then((response) => {
+//           return response || fetch(evt.request);
+//         });
+//     })
+//   );
+// });
+self.addEventListener('fetch', function (event) {
+
+  event.respondWith(
+
+    caches.open(cacheName).then(function (cache) {
+      return cache.match(event.request).then(function (response) {
+        return response || fetch(event.request).then(function (response) {
+          cache.put(event.request, response.clone());
+          return response;
         });
+      });
     })
+
   );
+
 });
