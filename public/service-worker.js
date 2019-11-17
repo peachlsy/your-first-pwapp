@@ -24,10 +24,12 @@ const DATA_CACHE_NAME = 'data-cache-v1';
 const FILES_TO_CACHE = [
   '/',
   '/index.html',
+  '/secondPage.html',
   '/scripts/app.js',
   '/scripts/install.js',
   '/scripts/luxon-1.11.4.js',
   '/styles/inline.css',
+  'images/picView.png',
   '/images/add.svg',
   '/images/clear-day.svg',
   '/images/clear-night.svg',
@@ -46,6 +48,7 @@ const FILES_TO_CACHE = [
   '/images/wind.svg',
 ];
 
+//用于缓存内容
 self.addEventListener('install', (evt) => {
   console.log('[ServiceWorker] Install');
   // CODELAB: Precache static resources here.
@@ -58,6 +61,7 @@ self.addEventListener('install', (evt) => {
   self.skipWaiting();
 });
 
+//用于清除旧的缓存
 self.addEventListener('activate', (evt) => {
   console.log('[ServiceWorker] Activate');
   // CODELAB: Remove previous cached data from disk.
@@ -69,11 +73,12 @@ self.addEventListener('activate', (evt) => {
           return caches.delete(key);
         }
       }));
-    })
+    })//
   );
   self.clients.claim();
 });
 
+//fetch事件在请求发送的时候触发
 self.addEventListener('fetch', (evt) => {
   console.log('[ServiceWorker] Fetch', evt.request.url);
   // CODELAB: Add fetch event handler here.
