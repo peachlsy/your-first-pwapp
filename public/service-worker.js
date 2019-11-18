@@ -25,6 +25,7 @@ const FILES_TO_CACHE = [
   '/',
   '/index.html',
   '/secondPage.html',
+  '/thirdPage.html',
   '/scripts/app.js',
   '/scripts/install.js',
   '/scripts/luxon-1.11.4.js',
